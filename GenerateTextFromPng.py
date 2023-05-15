@@ -7,7 +7,7 @@ import os
 
 def get_text_filename(image_src):
     output_str = ""
-    text_file_source = "/home/saraj/Desktop/TextBooks/TextFiles/class3/"
+    text_file_source = "/home/saraj/Desktop/TextBooks/TextFiles/class4/"
     output_str += text_file_source
     ok = 0
     temp_filename = ""
@@ -15,7 +15,7 @@ def get_text_filename(image_src):
         if image_src[i] == ".":
             ok = 1
             continue
-        if image_src[i] == "-":
+        if image_src[i] == "/":
             break
         else:
             if ok:
@@ -33,16 +33,28 @@ def get_text_filename(image_src):
 ### Copy Path Must be USED(NOT Relative Path)"""####
 
 #image = cv2.imread(image_src)
-png_directory = '/home/saraj/Desktop/TextBooks/PDF_Files/class3/'
+i = 0
+png_directory = '/home/saraj/Desktop/TextBooks/PNG_Files/class4/'
 for filename in os.listdir(png_directory):
     if filename.endswith('.png'):
+        print("IIIIII", i)
+        i += 1
         image_src = png_directory + filename
+        print("imageSrc, " + image_src + "   filename " + filename )
         image = cv2.imread(image_src)
         string = pytesseract.image_to_string(image, lang='ben') ##Generate string form PNG
 
         text_filename = get_text_filename(image_src)
+        print("Text Files Name:", text_filename)
         text_file = open(text_filename, "w")
         n = text_file.write(string)
         text_file.close()
 
 
+
+
+"""Resources:
+https://builtin.com/data-science/python-ocr
+https://askubuntu.com/questions/793634/how-do-i-install-a-new-language-pack-for-tesseract-on-16-04
+https://www.w3schools.com/python/python_file_write.asp
+"""
