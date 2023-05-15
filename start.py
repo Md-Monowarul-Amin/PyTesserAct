@@ -2,11 +2,12 @@ import pytesseract
 import cv2
 import matplotlib.pyplot as plt
 from PIL import Image
+import os
 
 
 def get_text_filename(image_src):
     output_str = ""
-    text_file_source = "/home/saraj/Desktop/OCR/TextFiles/"
+    text_file_source = "/home/saraj/Desktop/TextBooks/TextFiles/class3/"
     output_str += text_file_source
     ok = 0
     temp_filename = ""
@@ -14,7 +15,7 @@ def get_text_filename(image_src):
         if image_src[i] == ".":
             ok = 1
             continue
-        if image_src[i] == "/":
+        if image_src[i] == "-":
             break
         else:
             if ok:
@@ -27,22 +28,21 @@ def get_text_filename(image_src):
     return output_str
 
 
+
 # read the image using OpenCV
 ### Copy Path Must be USED(NOT Relative Path)"""####
-##image_src = "/home/saraj/Desktop/OCR/Class3_Math-035.png"
-image_src = input("Enter Image Source: ")
-image = cv2.imread(image_src)
-# or you can use Pillow
-# image = Image.open("test.png")
-###TextFile Source = ""/home/saraj/Desktop/OCR/TextFiles""
-# get the string
-string = pytesseract.image_to_string(image, lang='ben')
 
-text_filename = get_text_filename(image_src)
-### Copy Relative Path Must be USED"""#####
-text_file = open(text_filename, "w")
-n = text_file.write(string)
-text_file.close()
+#image = cv2.imread(image_src)
+png_directory = '/home/saraj/Desktop/TextBooks/PDF_Files/class3/'
+for filename in os.listdir(png_directory):
+    if filename.endswith('.png'):
+        image_src = png_directory + filename
+        image = cv2.imread(image_src)
+        string = pytesseract.image_to_string(image, lang='ben') ##Generate string form PNG
 
-# print it
-print(string)
+        text_filename = get_text_filename(image_src)
+        text_file = open(text_filename, "w")
+        n = text_file.write(string)
+        text_file.close()
+
+
