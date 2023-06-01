@@ -11,9 +11,9 @@ def convert_into_3_digits(i):
       return i
  
 # Store Pdf with convert_from_path function
-images = convert_from_path('/home/saraj/Desktop/TextBooks/PDF_Files/class4/Class-4 Mathematics Final OPT.pdf', 200)
- 
+#images = convert_from_path('/home/saraj/Desktop/TextBooks/PDF_Files/BCS/10th to 44th BCS Math And Mental ability [ exambd.net ]-.pdf', 250)
+images = convert_from_path('/home/saraj/Desktop/TextBooks/Online/Math Practice Set 3 - kolom.in.pdf')
 for i in range(len(images)):
-   
+    print(i)
       # Save pages as images in the pdf
-    images[i].save('/home/saraj/Desktop/TextBooks/PNG_Files/class4/'+ convert_into_3_digits(str(i)) +'.png', 'JPEG')
+    images[i].save('/home/saraj/Desktop/TextBooks/Online/PNG'+ convert_into_3_digits(str(i)) +'.jpg', 'JPEG')

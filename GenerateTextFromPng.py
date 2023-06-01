@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import os
 
+class_ = "4"
 
 def get_text_filename(image_src):
     output_str = ""
-    text_file_source = "/home/saraj/Desktop/TextBooks/TextFiles/class4/"
+    text_file_source = "/home/saraj/Desktop/TextBooks/Online/TEXT/"
     output_str += text_file_source
     ok = 0
     temp_filename = ""
@@ -23,8 +24,8 @@ def get_text_filename(image_src):
             else:
                 continue
     
-    output_str += temp_filename
-    output_str += ".txt"
+    output_str =  output_str + temp_filename
+    output_str = output_str + ".txt"
     return output_str
 
 
@@ -34,21 +35,24 @@ def get_text_filename(image_src):
 
 #image = cv2.imread(image_src)
 i = 0
-png_directory = '/home/saraj/Desktop/TextBooks/PNG_Files/class4/'
+png_directory = '/home/saraj/Desktop/TextBooks/Online/PNG/'  
 for filename in os.listdir(png_directory):
-    if filename.endswith('.png'):
+    if filename.endswith('.jpg'):
         print("IIIIII", i)
         i += 1
-        image_src = png_directory + filename
+        print("filename- ", filename)
+        image_src = png_directory + '/' + filename
         print("imageSrc, " + image_src + "   filename " + filename )
         image = cv2.imread(image_src)
         string = pytesseract.image_to_string(image, lang='ben') ##Generate string form PNG
 
         text_filename = get_text_filename(image_src)
+        #text_filename = '/home/saraj/Desktop/TextBooks/Online/Math Practice Set 3 - kolom.in.txt'  
         print("Text Files Name:", text_filename)
         text_file = open(text_filename, "w")
         n = text_file.write(string)
         text_file.close()
+
 
 
 
